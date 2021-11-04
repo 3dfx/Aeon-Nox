@@ -6,7 +6,13 @@
 		<control type="visualisation" id="2">
 			<!-- FIX ME Music Visualization needs to have an id of 2 in this window to be able to lock or change preset -->
 			<description>visualisation</description>
+<!-- 3dfx -->
+	<!--
 			<include>FullscreenDimensions</include>
+	-->
+<!-- /3dfx -->
+			<animation effect="fade" start="0" end="100" time="400">Visible</animation>
+			<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
 			<visible>Player.HasAudio + ![String.IsEqual(Visualisation.Name,waveform) | String.Contains(Visualisation.Name,spectrum)]</visible>
 		</control>
 		<control type="group">
@@ -15,7 +21,11 @@
 			<include>SettingsFadeAnimation</include>
 			<control type="multiimage" id="90300">
 				<description>Fanart image</description>
+<!-- 3dfx -->
+	<!--
 				<include>FullscreenDimensions</include>
+	-->
+<!-- /3dfx -->
 				<fadetime>2000</fadetime>
 				<imagepath background="true">$VAR[VizBackgroundVar]</imagepath>
 				<animation effect="fade" start="100" end="20" time="0" condition="![String.IsEqual(Visualisation.Name,waveform) | String.Contains(Visualisation.Name,spectrum) | String.IsEmpty(Visualisation.Name)] + !Skin.HasSetting(HideVisualizationFanart)">Conditional</animation>
@@ -24,7 +34,11 @@
 		<control type="group">
 			<visible>String.IsEqual(Skin.String(Viz.Background),1)</visible>
 			<visible>[Visualisation.Enabled + !Skin.HasSetting(HideVisualizationFanart)] | !Visualisation.Enabled</visible>
+<!-- 3dfx -->
+	<!--
 			<include>SettingsFadeAnimation</include>
+	-->
+<!-- /3dfx -->
 			<animation effect="fade" start="100" end="20" time="0" condition="![String.IsEqual(Visualisation.Name,waveform) | String.Contains(Visualisation.Name,spectrum) | String.IsEmpty(Visualisation.Name)] + !Skin.HasSetting(HideVisualizationFanart)">Conditional</animation>
 			<control type="panel" id="9032">
 				<width>100%</width>
@@ -63,12 +77,16 @@
 				<content>special://skin/extras/playlists/albumwall.xsp</content>
 			</control>
 		</control>
+<!-- 3dfx -->
+	<!--
 		<control type="visualisation" id="2">
-			<!-- FIX ME Music Visualization needs to have an id of 2 in this window to be able to lock or change preset -->
+			<!-- FIX ME Music Visualization needs to have an id of 2 in this window to be able to lock or change preset ->
 			<description>visualisation</description>
 			<include>FullscreenDimensions</include>
 			<visible>Player.HasAudio + [String.IsEqual(Visualisation.Name,waveform) | String.Contains(Visualisation.Name,spectrum)]</visible>
 		</control>
+	-->
+<!-- /3dfx -->
 		<!-- media infos -->
 		<control type="fadelabel">
 			<width>100%</width>
@@ -280,7 +298,7 @@
 					<top>44</top>
 					<width>60</width>
 					<height>41</height>
-					<label></label>
+					<label>?</label>
 					<font>IconSmall</font>
 					<textcolor>themecolor</textcolor>
 				</control>
@@ -303,7 +321,12 @@
 		<control type="group" id="0">
 			<animation effect="slide" start="0,-340" end="0,0" time="200">VisibleChange</animation>
 			<animation effect="fade" time="200">VisibleChange</animation>
+<!-- 3dfx -->
+			<!--
 			<visible>Player.ShowCodec + ![Window.IsVisible(script-XBMC_Lyrics-main.xml) | Window.IsVisible(VisualisationSettings) | Window.IsVisible(VisualisationPresetList)]</visible>
+			-->
+			<visible>Skin.HasSetting(ShowCodecInfoMusic) + ![Window.IsVisible(script-XBMC_Lyrics-main.xml) | Window.IsVisible(VisualisationSettings) | Window.IsVisible(VisualisationPresetList)]</visible>
+<!-- /3dfx -->
 			<control type="image">
 				<width>100%</width>
 				<height>340</height>
