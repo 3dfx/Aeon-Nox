@@ -1,7 +1,7 @@
 *.bat
 *.cmd
 *.log
-*.xbt
+#*.xbt
 *.exe
 *.py
 *.sublime-project
