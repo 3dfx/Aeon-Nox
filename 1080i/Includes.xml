@@ -571,7 +571,7 @@
 			<font>IconTiny</font>
 			<textcolor>grey</textcolor>
 			<shadowcolor>shadow</shadowcolor>
-			<onclick>RunAddon(script.globalsearch)</onclick>
+			<onclick condition="System.HasAddon(script.globalsearch)">RunAddon(script.globalsearch)</onclick>
 			<animation type="Visible">
 				<effect type="fade" start="0" end="100" tween="sine" easing="inout" time="300" />
 				<effect type="zoom" start="50" end="100" center="auto" tween="sine" easing="inout" time="300" />
