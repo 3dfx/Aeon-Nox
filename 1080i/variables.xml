@@ -3,6 +3,7 @@
 <!-- 3dfx -->
 	<variable name="HDR">
 		<value condition="String.Contains(Player.filename,x265) + String.Contains(Player.filename,HDR)">HDR</value>
+		<value condition="String.Contains(Player.filename,x265) + String.Contains(Player.filename, DV )">DV</value>
 		<value></value>
 	</variable>
 	<variable name="HevcBits">
@@ -11,9 +12,10 @@
 		<value></value>
 	</variable>
 	<variable name="AudioDecoderVar">
-		<value condition="Integer.IsGreater(VideoPlayer.AudioChannels,7) + String.Contains(Player.filename,Atmos) + [String.IsEqual(Player.Process(AudioDecoder),pt-truehd) | String.IsEqual(Player.Process(AudioDecoder),PT_TRUEHD)]">Atmos</value>
-		<value condition="Integer.IsGreater(VideoPlayer.AudioChannels,7) + String.Contains(Player.filename,Atmos) + [String.IsEqual(Player.Process(AudioDecoder),ff-eac3) | String.IsEqual(Player.Process(AudioDecoder),pt-eac3) | String.IsEqual(Player.Process(AudioDecoder),PT_EAC3)]">Atmos</value>
+		<value condition="String.Contains(Player.filename,Atmos) + [String.IsEqual(Player.Process(AudioDecoder),pt-truehd) | String.IsEqual(Player.Process(AudioDecoder),PT_TRUEHD)]">Atmos</value>
+		<value condition="String.Contains(Player.filename,Atmos) + [String.IsEqual(Player.Process(AudioDecoder),ff-eac3) | String.IsEqual(Player.Process(AudioDecoder),pt-eac3) | String.IsEqual(Player.Process(AudioDecoder),PT_EAC3)]">Atmos</value>
 		<!--
+		Integer.IsGreater(VideoPlayer.AudioChannels,7)
 		<value condition="String.Contains(Player.filename,Atmos)">Atmos</value>
 		-->
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),pt-truehd) | String.IsEqual(Player.Process(AudioDecoder),PT_TRUEHD)]">True-HD</value>
@@ -39,6 +41,18 @@
 		<value condition="String.StartsWith(Player.Process(AudioSamplerate),22)">22.05 kHz</value>
 		<value condition="String.StartsWith(Player.Process(AudioSamplerate),11)">11.025 kHz</value>
 		<value>$INFO[Player.Process(AudioSamplerate)] Hz</value>
+	</variable>
+	<variable name="ListItemAudioCodecPlusFilenameFlags">
+		<value condition="String.Contains(ListItem.Filenameandpath,Atmos)">atmos</value>
+		<value condition="String.Contains(ListItem.Filenameandpath,DTS-X)">dts-x</value>
+		<value condition="String.Contains(ListItem.Filenameandpath,DTSX)">dts-x</value>
+		<value>$INFO[ListItem.AudioCodec]</value>
+	</variable>
+	<variable name="VideoPlayerAudioCodecPlusFilenameFlags">
+		<value condition="String.Contains(Player.Filename,Atmos)">atmos</value>
+		<value condition="String.Contains(Player.Filename,DTS-X)">dts-x</value>
+		<value condition="String.Contains(Player.Filename,DTSX)">dts-x</value>
+		<value>$INFO[VideoPlayer.AudioCodec]</value>
 	</variable>
 <!-- /3dfx -->
 

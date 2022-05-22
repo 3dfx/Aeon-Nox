@@ -12,7 +12,7 @@
 		<control type="label" id="4420">
 			<label>$VAR[VideoInfoPanelVar]</label>
 			<include>HiddenObject</include>
-			<visible>Control.IsVisible(52) | Control.IsVisible(53)</visible>
+			<visible>[Control.IsVisible(52) | Control.IsVisible(53)]</visible>
 			<include condition="!String.IsEmpty(Skin.String(InfoPanel.Delay))">InfoPanelDelayAnimation</include>
 		</control>
 		<include>CommonBackground</include>
@@ -83,14 +83,14 @@
 			<!-- view id = 510 -->
 		</control>
 		<control type="group">
-			<visible>Control.IsVisible(52) | Control.IsVisible(53) | Control.IsVisible(500) | Control.IsVisible(55) | Control.IsVisible(56) | Control.IsVisible(57) | Control.IsVisible(59)</visible>
+			<visible>[Control.IsVisible(52) | Control.IsVisible(53) | Control.IsVisible(500) | Control.IsVisible(55) | Control.IsVisible(56) | Control.IsVisible(57) | Control.IsVisible(59)]</visible>
 			<visible>!Window.IsActive(addoninformation)</visible>
 			<depth>MaxDepth</depth>
 			<animation effect="slide" tween="cubic" time="720" start="0,806" end="0,0">VisibleChange</animation>
 			<include>WindowOpenCloseAnimation</include>
 			<top>-30</top>
 			<control type="group">
-				<visible>Control.IsVisible(52) | Control.IsVisible(53) | Control.IsVisible(59)</visible>
+				<visible>[Control.IsVisible(52) | Control.IsVisible(53) | Control.IsVisible(59)]</visible>
 				<animation effect="slide" tween="cubic" time="720" start="0,806" end="0,0">VisibleChange</animation>
 				<control type="grouplist">
 					<left>300</left>
@@ -155,7 +155,8 @@
 						<left>120</left>
 						<colordiffuse>white</colordiffuse>
 						<include>MediaFlagVars</include>
-						<texture>$INFO[ListItem.AudioCodec,flags/audio/,.png]</texture>
+						<!--<texture>$INFO[ListItem.AudioCodec,flags/audio/,.png]</texture>-->
+						<texture>$VAR[ListItemAudioCodecPlusFilenameFlags,flags/audio/,.png]</texture>
 					</control>
 					<control type="image">
 						<right>120</right>
@@ -167,7 +168,7 @@
 				</control>
 			</control>
 			<control type="group">
-				<visible>Control.IsVisible(500) | Control.IsVisible(55) | Control.IsVisible(56) | Control.IsVisible(57)</visible>
+				<visible>[Control.IsVisible(500) | Control.IsVisible(55) | Control.IsVisible(56) | Control.IsVisible(57)]</visible>
 				<animation effect="slide" start="0" end="40" time="720" tween="cubic" easing="inout" condition="Control.IsVisible(57)">Conditional</animation>
 				<animation effect="slide" start="0" end="60" time="720" tween="cubic" easing="inout" condition="Control.IsVisible(55)">Conditional</animation>
 				<animation effect="slide" start="0,0" end="80,15" time="720" tween="cubic" easing="inout" condition="Control.IsVisible(56)">Conditional</animation>
@@ -201,7 +202,7 @@
 					<width>535</width>
 					<height>90</height>
 					<include>VisibleFadeAnimation</include>
-					<visible>Container.Content(tvshows) | Container.Content(seasons)</visible>
+					<visible>[Container.Content(tvshows) | Container.Content(seasons)]</visible>
 					<control type="group">
 						<left>-175</left>
 						<width>160</width>
@@ -276,7 +277,8 @@
 					<control type="image">
 						<left>230</left>
 						<include>MediaFlagVars</include>
-						<texture>$INFO[ListItem.AudioCodec,flags/audio/,.png]</texture>
+						<!--<texture>$INFO[ListItem.AudioCodec,flags/audio/,.png]</texture>-->
+						<texture>$VAR[ListItemAudioCodecPlusFilenameFlags,flags/audio/,.png]</texture>
 						<visible>!String.IsEmpty(ListItem.AudioCodec)</visible>
 					</control>
 					<control type="image">
@@ -312,7 +314,7 @@
 					<onclick condition="Control.IsVisible(52)">$VAR[52VideoInfoPanelVar]</onclick>
 					<onclick condition="Control.IsVisible(53)">$VAR[53VideoInfoPanelVar]</onclick>
 					<onclick condition="Control.IsVisible(503)">Skin.ToggleSetting(503.InfoPanel)</onclick>
-					<visible>Control.IsVisible(52) | Control.IsVisible(53) | Control.IsVisible(503)</visible>
+					<visible>[Control.IsVisible(52) | Control.IsVisible(53) | Control.IsVisible(503)]</visible>
 				</control>
 				<control type="button" id="6052">
 					<description>BannerWall/List Toggle</description>
@@ -422,7 +424,7 @@
 					<include>ButtonCommonValues</include>
 					<label>$LOCALIZE[5]</label>
 					<onclick>ActivateWindow(mediasettings,video)</onclick>
-					<visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(epsiodes) | Container.Content(musicvideos)</visible>
+					<visible>[Container.Content(movies) | Container.Content(tvshows) | Container.Content(epsiodes) | Container.Content(musicvideos)]</visible>
 				</control>
 				<control type="button" id="612">
 					<description>Go to playlist</description>
