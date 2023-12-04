@@ -101,7 +101,7 @@
 				<top>2</top>
 				<width>8</width>
 				<height>180</height>
-				<texturesliderbackground>scrollbar/texturesliderbackground3.png</texturesliderbackground>
+				<texturesliderbackground />
 				<texturesliderbar colordiffuse="55ffffff" border="4">scrollbar/texturesliderbar3.png</texturesliderbar>
 				<texturesliderbarfocus border="4">scrollbar/texturesliderbar3.png</texturesliderbarfocus>
 				<onleft>10</onleft>

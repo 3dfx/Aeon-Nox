@@ -8,6 +8,7 @@
 	<include file="Includes_LiveTV.xml" />
 	<include file="Includes_LiveTV_Views.xml" />
 	<include file="Includes_Backgrounds.xml" />
+	<include file="Includes_DialogVideoVersion.xml" />
 	<include file="Includes_Widgets.xml" />
 	<include file="Includes_16x9.xml" condition="!String.IsEqual(Skin.AspectRatio,21:9)" />
 	<include file="Includes_21x9.xml" condition="String.IsEqual(Skin.AspectRatio,21:9)" />
@@ -846,4 +847,308 @@
 			<content target="$PARAM[target]">$PARAM[content]</content>
 		</definition>
 	</include>
+
+<!-- 3dfx -->
+	<include name="Animation_DialogPopupVisible">
+		<animation type="Visible" reversible="false">
+			<effect type="zoom" start="80" end="100" center="50%,50%" delay="160" tween="back" time="240" />
+			<effect type="fade" delay="160" end="100" time="240" />
+		</animation>
+		<animation type="Hidden" reversible="false">
+			<effect type="zoom" start="100" end="80" center="50%,50%" easing="in" tween="back" time="240" />
+			<effect type="fade" start="100" end="0" time="240" />
+		</animation>
+	</include>
+	<include name="DefaultDialogButton">
+		<param name="width">450</param>
+		<param name="height">80</param>
+		<param name="wrapmultiline">false</param>
+		<param name="font">font14</param>
+		<param name="onclick"></param>
+		<param name="visible">true</param>
+		<param name="enable">true</param>
+		<definition>
+			<control type="button" id="$PARAM[id]">
+				<wrapmultiline>$PARAM[wrapmultiline]</wrapmultiline>
+				<visible>$PARAM[visible]</visible>
+				<enable>$PARAM[enable]</enable>
+				<onclick>$PARAM[onclick]</onclick>
+				<top>0</top>
+				<width>$PARAM[width]</width>
+				<height>$PARAM[height]</height>
+				<texturefocus border="1">listselect_fo.png</texturefocus>
+				<texturenofocus border="1">separator2.png</texturenofocus>
+				<font>$PARAM[font]</font>
+				<textcolor>grey2</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<disabledcolor>grey4</disabledcolor>
+				<label>$PARAM[label]</label>
+				<textoffsetx>15</textoffsetx>
+				<aligny>center</aligny>
+				<pulseonselect>false</pulseonselect>
+			</control>
+		</definition>
+	</include>
+	<include name="DialogToggleButton">
+		<param name="width">450</param>
+		<param name="height">80</param>
+		<param name="wrapmultiline">false</param>
+		<param name="font">font14</param>
+		<param name="onclick"></param>
+		<param name="visible">true</param>
+		<param name="enable">true</param>
+		<param name="usealttexture">false</param>
+		<definition>
+			<control type="togglebutton" id="$PARAM[id]">
+				<wrapmultiline>$PARAM[wrapmultiline]</wrapmultiline>
+				<visible>$PARAM[visible]</visible>
+				<enable>$PARAM[enable]</enable>
+				<usealttexture>$PARAM[usealttexture]</usealttexture>
+				<left>0</left>
+				<top>0</top>
+				<width>$PARAM[width]</width>
+				<height>$PARAM[height]</height>
+				<textoffsetx>15</textoffsetx>
+				<texturefocus border="1">listselect_fo.png</texturefocus>
+				<texturenofocus border="1">separator2.png</texturenofocus>
+				<alttexturefocus border="1">listselect_fo.png</alttexturefocus>
+				<alttexturenofocus border="1">separator2.png</alttexturenofocus>
+				<textcolor>grey2</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<disabledcolor>grey4</disabledcolor>
+				<label>$PARAM[label]</label>
+				<aligny>center</aligny>
+				<font>$PARAM[font]</font>
+				<pulseonselect>false</pulseonselect>
+				<onclick>noop</onclick>
+			</control>
+		</definition>
+	</include>
+
+        <include name="Animation_DialogPopupOpenClose">
+                <animation type="WindowOpen" reversible="false">
+                        <effect type="zoom" start="80" end="100" center="50%,50%" delay="160" tween="back" time="240" />
+                        <effect type="fade" delay="160" end="100" time="240" />
+                </animation>
+                <animation type="WindowClose" reversible="false">
+                        <effect type="zoom" start="100" end="80" center="50%,50%" easing="in" tween="back" time="240" />
+                        <effect type="fade" start="100" end="0" time="240" />
+                </animation>
+                <depth>DepthDialog</depth>
+        </include>
+	<include name="DialogBackgroundCommons">
+		<control type="image">
+			<left>-2000</left>
+			<top>-2000</top>
+			<width>6000</width>
+			<height>6000</height>
+			<animation effect="fade" time="300">VisibleChange</animation>
+			<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+			<texture border="40">special://skin/myne/dialog-bg.png</texture>
+			<texture colordiffuse="80FFFFFF" background="true" fallback="special://skin/myne/black.png">$VAR[PosterVar]</texture>
+			<visible>$PARAM[darken_bg]</visible>
+		</control>
+		<control type="button">
+			<left>-2000</left>
+			<top>-2000</top>
+			<width>6000</width>
+			<height>6000</height>
+			<texturefocus />
+			<texturenofocus />
+			<onclick>Action(close)</onclick>
+		</control>
+		<control type="group">
+			<width>$PARAM[width]</width>
+			<height>$PARAM[height]</height>
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<bottom>0</bottom>
+				<texture colordiffuse="dialog_tint" background="true" fallback="special://skin/myne/white.png">$VAR[PosterVar]</texture>
+			</control>
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<height>70</height>
+				<texture colordiffuse="button_focus" border="2">special://skin/myne/white70.png</texture>
+			</control>
+			<control type="label" id="$PARAM[header_id]">
+				<left>40</left>
+				<top>0</top>
+				<right>100</right>
+				<height>70</height>
+				<font>font14</font>
+				<label>$PARAM[header_label]</label>
+				<aligny>center</aligny>
+				<shadowcolor>black</shadowcolor>
+			</control>
+			<control type="button" id="22002">
+				<description>button overlay to avoid closing in dialog area</description>
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<bottom>0</bottom>
+				<texturefocus />
+				<texturenofocus />
+				<onclick>noop</onclick>
+			</control>
+			<control type="radiobutton">
+				<right>10</right>
+				<top>11</top>
+				<width>48</width>
+				<height>48</height>
+				<radiowidth>48</radiowidth>
+				<radioheight>48</radioheight>
+				<texturefocus />
+				<texturenofocus />
+				<label></label>
+				<textureradioofffocus colordiffuse="EEFFFFFF">special://skin/myne/close.png</textureradioofffocus>
+				<textureradiooffnofocus colordiffuse="EEFFFFFF">special://xbmc/media/vendor_icon.png</textureradiooffnofocus>
+				<textureradioonfocus colordiffuse="EEFFFFFF">special://skin/myne/close.png</textureradioonfocus>
+				<textureradioonnofocus colordiffuse="EEFFFFFF">special://xbmc/media/vendor_icon.png</textureradioonnofocus>
+				<onclick>Action(close)</onclick>
+				<visible>!Skin.HasSetting(touchmode)</visible>
+			</control>
+			<control type="button">
+				<right>10</right>
+				<top>11</top>
+				<width>48</width>
+				<height>48</height>
+				<texturefocus>special://skin/myne/close.png</texturefocus>
+				<texturenofocus>special://skin/myne/close.png</texturenofocus>
+				<onclick>Action(close)</onclick>
+				<visible>Skin.HasSetting(touchmode)</visible>
+			</control>
+		</control>
+	</include>
+	<include name="DefaultSimpleListLayout">
+		<param name="align">left</param>
+		<param name="height">70</param>
+		<param name="font">font13</param>
+		<param name="fontcolor">grey</param>
+		<definition>
+			<itemlayout width="$PARAM[width]" height="$PARAM[height]">
+				<control type="group">
+					<visible>ListItem.Property(PVR.IsRecordingTimer) | ListItem.Property(PVR.IsRemindingTimer)</visible>
+					<control type="image">
+						<left>20</left>
+						<width>40</width>
+						<aspectratio align="left">keep</aspectratio>
+						<aligny>center</aligny>
+						<texture>icons/pvr/timers/recording.png</texture>
+						<visible>ListItem.Property(PVR.IsRecordingTimer)</visible>
+					</control>
+					<control type="image">
+						<left>20</left>
+						<width>40</width>
+						<aspectratio align="left">keep</aspectratio>
+						<aligny>center</aligny>
+						<texture>icons/pvr/timers/bell.png</texture>
+						<visible>ListItem.Property(PVR.IsRemindingTimer)</visible>
+					</control>
+					<control type="label">
+						<left>80</left>
+						<top>0</top>
+						<right>20</right>
+						<bottom>0</bottom>
+						<align>$PARAM[align]</align>
+						<font>$PARAM[font]</font>
+						<aligny>center</aligny>
+						<textcolor>$PARAM[fontcolor]</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</control>
+				<control type="group">
+					<visible>!ListItem.Property(PVR.IsRecordingTimer) + !ListItem.Property(PVR.IsRemindingTimer)</visible>
+					<control type="label">
+						<left>20</left>
+						<top>0</top>
+						<right>20</right>
+						<bottom>0</bottom>
+						<align>$PARAM[align]</align>
+						<font>$PARAM[font]</font>
+						<aligny>center</aligny>
+						<textcolor>$PARAM[fontcolor]</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</control>
+			</itemlayout>
+			<focusedlayout width="$PARAM[width]" height="$PARAM[height]">
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<right>0</right>
+					<bottom>0</bottom>
+					<texture colordiffuse="button_focus">lists/focus.png</texture>
+					<visible>Control.HasFocus($PARAM[list_id])</visible>
+				</control>
+				<control type="group">
+					<visible>ListItem.Property(PVR.IsRecordingTimer) | ListItem.Property(PVR.IsRemindingTimer)</visible>
+					<control type="image">
+						<left>20</left>
+						<width>40</width>
+						<aspectratio align="left">keep</aspectratio>
+						<aligny>center</aligny>
+						<texture>icons/pvr/timers/recording.png</texture>
+						<visible>ListItem.Property(PVR.IsRecordingTimer)</visible>
+					</control>
+					<control type="image">
+						<left>20</left>
+						<width>40</width>
+						<aspectratio align="left">keep</aspectratio>
+						<aligny>center</aligny>
+						<texture>icons/pvr/timers/bell.png</texture>
+						<visible>ListItem.Property(PVR.IsRemindingTimer)</visible>
+					</control>
+					<control type="label">
+						<left>80</left>
+						<top>0</top>
+						<right>20</right>
+						<bottom>0</bottom>
+						<align>$PARAM[align]</align>
+						<font>$PARAM[font]</font>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<scroll>true</scroll>
+					</control>
+				</control>
+				<control type="group">
+					<visible>!ListItem.Property(PVR.IsRecordingTimer) + !ListItem.Property(PVR.IsRemindingTimer)</visible>
+					<control type="label">
+						<left>20</left>
+						<top>0</top>
+						<right>20</right>
+						<bottom>0</bottom>
+						<align>$PARAM[align]</align>
+						<font>$PARAM[font]</font>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<scroll>true</scroll>
+					</control>
+				</control>
+			</focusedlayout>
+		</definition>
+	</include>
+	<include name="VideoVersionDialogButton">
+		<param name="width">264</param>
+		<param name="height">120</param>
+		<definition>
+			<control type="button" id="$PARAM[id]">
+				<width>$PARAM[width]</width>
+				<height>$PARAM[height]</height>
+				<align>center</align>
+				<texturefocus border="21" colordiffuse="button_focus">special://skin/myne/dialog-bg.png</texturefocus>
+				<texturenofocus border="21">special://skin/myne/dialog-bg.png</texturenofocus>
+				<textoffsetx>22</textoffsetx>
+				<textoffsety>78</textoffsety>
+				<font>font14</font>
+				<label>$PARAM[label]</label>
+				<animation effect="fade" start="100" end="0" time="300" delay="300">Hidden</animation>
+			</control>
+		</definition>
+	</include>
+<!-- 3dfx -->
 </includes>
