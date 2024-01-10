@@ -8,6 +8,7 @@
 *.sublime-workspace
 *.DS_Store
 *.sh
+.idea
 themes/test
 colors/test.xml
 1080i/script-skinshortcuts-includes.xml

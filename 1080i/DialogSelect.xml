@@ -48,10 +48,7 @@
 					<width>300</width>
 					<height>332</height>
 					<aspectratio aligny="top">keep</aspectratio>
-					<!--
-					<texture>$VAR[SelectVersionPosterVar]</texture>
-					-->
-					<texture>$INFO[Container(6).ListItem.Icon]</texture>
+					<texture>$VAR[VideoListPosterVar]</texture>
 					<bordertexture border="5">dialogs/default/inner.png</bordertexture>
 					<bordersize>1</bordersize>
 					<visible>Control.IsVisible(6)</visible>

@@ -264,7 +264,7 @@
 				<control type="group">
 					<right>110</right>
 					<top>1000</top>
-					<width>563</width>
+					<width>700</width>
 					<height>90</height>
 					<include>VisibleFadeAnimation</include>
 					<visible>![Container.Content(tvshows) | Container.Content(seasons)]</visible>
@@ -277,7 +277,6 @@
 					<control type="image">
 						<left>230</left>
 						<include>MediaFlagVars</include>
-						<!--<texture>$INFO[ListItem.AudioCodec,flags/audio/,.png]</texture>-->
 						<texture>$VAR[ListItemAudioCodecPlusFilenameFlags,flags/audio/,.png]</texture>
 						<visible>!String.IsEmpty(ListItem.AudioCodec)</visible>
 					</control>
@@ -286,6 +285,13 @@
 						<include>MediaFlagVars</include>
 						<texture>$VAR[SourceFlagVar,flags/video/,.png]</texture>
 						<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
+					</control>
+					<control type="image">
+						<left>428</left>
+						<colordiffuse>grey</colordiffuse>
+						<include>MediaFlagVars</include>
+						<texture>$VAR[HdrTypeIcon,flags/video/,.png]</texture>
+						<visible>!String.IsEmpty(ListItem.HdrType)</visible>
 					</control>
 				</control>
 			</control>
