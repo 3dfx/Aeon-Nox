@@ -944,7 +944,7 @@
 			<animation effect="fade" time="300">VisibleChange</animation>
 			<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
 			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
-			<texture border="40">special://skin/myne/dialog-bg.png</texture>
+			<texture border="40">dialogs/default/bg.png</texture>
 			<texture colordiffuse="80FFFFFF" background="true" fallback="special://skin/myne/black.png">$VAR[PosterVar]</texture>
 			<visible>$PARAM[darken_bg]</visible>
 		</control>
@@ -1139,8 +1139,8 @@
 				<width>$PARAM[width]</width>
 				<height>$PARAM[height]</height>
 				<align>center</align>
-				<texturefocus border="21" colordiffuse="button_focus">special://skin/myne/dialog-bg.png</texturefocus>
-				<texturenofocus border="21">special://skin/myne/dialog-bg.png</texturenofocus>
+				<texturefocus border="21" colordiffuse="button_focus">dialogs/default/bg.png</texturefocus>
+				<texturenofocus border="21">dialogs/default/bg.png</texturenofocus>
 				<textoffsetx>22</textoffsetx>
 				<textoffsety>78</textoffsety>
 				<font>font14</font>
@@ -1162,6 +1162,12 @@
 		<param name="focusedcolor">white</param>
 		<definition>
 			<itemlayout height="$PARAM[height]" width="$PARAM[width]">
+				<control type="image">
+					<left>135</left>
+					<width>630</width>
+					<height>130</height>
+					<texture border="1">separator2.png</texture>
+				</control>
 				<control type="image">
 					<left>12</left>
 					<top>7</top>
@@ -1218,6 +1224,19 @@
 					<bottom>0</bottom>
 					<texture colordiffuse="button_focus">listselect_fo.png</texture>
 					<animation effect="fade" start="100" end="50" time="0">UnFocus</animation>
+				</control>
+				<control type="image">
+					<left>135</left>
+					<width>630</width>
+					<height>130</height>
+					<texture border="1">separator2.png</texture>
+				</control>
+				<control type="image">
+					<left>135</left>
+					<width>630</width>
+					<height>125</height>
+					<texture border="5">listselect_fo.png</texture>
+					<visible>Control.HasFocus(6)</visible>
 				</control>
 				<control type="image">
 					<left>12</left>

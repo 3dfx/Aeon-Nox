@@ -166,7 +166,7 @@
 							<textoffsetx>15</textoffsetx>
 							<textcolor>grey2</textcolor>
 							<selectedcolor>selected</selectedcolor>
-							<label>$INFO[ListItem.Label]</label>
+							<label>$INFO[ListItem.Label]$VAR[NotStdVersionName]</label>
 						</control>
 						<control type="label">
 							<width>630</width>
@@ -201,7 +201,7 @@
 							<textoffsetx>15</textoffsetx>
 							<textcolor>white</textcolor>
 							<selectedcolor>selected</selectedcolor>
-							<label>$INFO[ListItem.Label]</label>
+							<label>$INFO[ListItem.Label]$VAR[NotStdVersionName]</label>
 							<animation effect="fade" start="100" end="70" time="300" tween="sine" easing="inout" condition="!Control.HasFocus(6)">Conditional</animation>
 						</control>
 						<control type="label">

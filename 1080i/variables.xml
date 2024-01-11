@@ -490,7 +490,6 @@
 	</variable>
 	<variable name="52MusicInfoPanelVar">
 		<value condition="Container.Content(artists) + String.IsEmpty(Skin.String(52.Artists.InfoPanel))">Skin.SetString(52.Artists.InfoPanel,2)</value>
-		<!-- <value condition="Container.Content(artists) + String.IsEqual(Skin.String(52.Artists.InfoPanel),1)">Skin.SetString(52.Artists.InfoPanel,2)</value> -->
 		<value condition="Container.Content(artists) + String.IsEqual(Skin.String(52.Artists.InfoPanel),2)">Skin.Reset(52.Artists.InfoPanel)</value>
 	</variable>
 	<variable name="54MusicInfoPanelVar">
@@ -498,7 +497,6 @@
 		<value condition="Container.Content(albums) + String.IsEqual(Skin.String(54.Albums.InfoPanel),1)">Skin.Reset(54.Albums.InfoPanel)</value>
 		<value condition="Container.Content(artists) + String.IsEmpty(Skin.String(54.Artists.InfoPanel))">Skin.SetString(54.Artists.InfoPanel,1)</value>
 		<value condition="Container.Content(artists) + String.IsEqual(Skin.String(54.Artists.InfoPanel),1)">Skin.Reset(54.Artists.InfoPanel)</value>
-		<!-- <value condition="Container.Content(albums) + String.IsEqual(Skin.String(54.Albums.InfoPanel),2)">Skin.Reset(54.Albums.InfoPanel)</value> -->
 	</variable>
 	<variable name="InfoPanelLabelVar">
 		<value condition="String.IsEqual(Control.GetLabel(4420),1)">$LOCALIZE[20445]</value>
