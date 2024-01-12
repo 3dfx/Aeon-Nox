@@ -180,7 +180,8 @@
 					<visible>![Control.IsVisible(56) | Control.IsVisible(55)]</visible>
 					<include>VisibleFadeAnimation</include>
 					<control type="label">
-						<right>640</right>
+						<left>0</left>
+						<width>1000</width>
 						<height>48</height>
 						<font>font16_title_bold</font>
 						<scroll>true</scroll>
@@ -269,25 +270,25 @@
 					<include>VisibleFadeAnimation</include>
 					<visible>![Container.Content(tvshows) | Container.Content(seasons)]</visible>
 					<control type="image">
-						<left>32</left>
+						<left>232</left>
 						<include>MediaFlagVars</include>
 						<texture>$INFO[ListItem.VideoResolution,flags/resolution/,.png]</texture>
 						<visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
 					</control>
 					<control type="image">
-						<left>230</left>
+						<left>430</left>
 						<include>MediaFlagVars</include>
 						<texture>$VAR[ListItemAudioCodecPlusFilenameFlags,flags/audio/,.png]</texture>
 						<visible>!String.IsEmpty(ListItem.AudioCodec)</visible>
 					</control>
 					<control type="image">
-						<left>428</left>
+						<left>628</left>
 						<include>MediaFlagVars</include>
 						<texture>$VAR[SourceFlagVar,flags/video/,.png]</texture>
 						<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
 					</control>
 					<control type="image">
-						<left>428</left>
+						<left>32</left>
 						<colordiffuse>grey</colordiffuse>
 						<include>MediaFlagVars</include>
 						<texture>$VAR[HdrTypeIcon,flags/video/,.png]</texture>
