@@ -76,7 +76,7 @@
 		<value>$INFO[ListItem.FileNameAndPath]</value>
 	</variable>
 	<variable name="NotStdVersionName">
-		<value condition="!String.IsEqual(ListItem.VideoVersionName,Standard Edition)"> ($INFO[ListItem.VideoVersionName])</value>
+		<value condition="!String.IsEmpty(ListItem.VideoVersionName) + !String.IsEqual(ListItem.VideoVersionName,Standard Edition)"> ($INFO[ListItem.VideoVersionName])</value>
 		<value></value>
 	</variable>
 	<variable name="SelectLabel">
