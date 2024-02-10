@@ -1244,14 +1244,14 @@ msgstr ""
 
 #. Add video version dialog title
 #: xbmc/video/dialogs/GUIDialogVideoManagerVersions.cpp
-#: addons/skin.estuary/xml/DialogVideoVersion.xml
+#: addons/skin.estuary/xml/DialogVideoManager.xml
 msgctxt "#40014"
 msgid "Add version"
 msgstr ""
 
 #. Add video extra dialog title
 #: xbmc/video/dialogs/GUIDialogVideoManagerExtras.cpp
-#: addons/skin.estuary/xml/DialogVideoVersion.xml
+#: addons/skin.estuary/xml/DialogVideoManager.xml
 msgctxt "#40015"
 msgid "Add extra"
 msgstr ""
@@ -1296,7 +1296,7 @@ msgid "Manage {0:s}"
 msgstr ""
 
 #. Button label to make a video version the default version
-#: addons/skin.estuary/xml/DialogVideoVersion.xml
+#: addons/skin.estuary/xml/DialogVideoManager.xml
 msgctxt "#40023"
 msgid "Set as default"
 msgstr ""
