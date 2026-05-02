@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.aeon.nox.5" version="7.0.3" name="Aeon Nox" provider-name="BigNoid">
+<addon id="skin.aeon.nox.5" version="7.0.17" name="Aeon Nox" provider-name="BigNoid-3dfx">
 	<requires>
-		<import addon="xbmc.gui" version="5.15.0"/>
-		<import addon="script.grab.fanart" version="0.15.1"/>
-		<import addon="script.skinshortcuts" version="1.0.10"/>
-		<import addon="service.library.data.provider" version="0.0.7"/>
+		<import addon="xbmc.gui" version="5.17.0"/>
+		<import addon="script.grab.fanart" version="0.16.0"/>
 		<import addon="resource.images.studios.white" version="0.0.1"/>
 		<import addon="resource.images.recordlabels.white" version="0.0.1"/>
 	</requires>
@@ -21,7 +19,7 @@
 		<summary lang="en_US">Aeon Nox 5: Redux</summary>
 		<summary lang="es">Aeon Nox 5: Redux</summary>
 		<summary lang="fi">Aeon Nox 5: Redux</summary>
-		<summary lang="fr">Aeon Nox 5 : Redux</summary>
+		<summary lang="fr">Aeon Nox 5: Redux</summary>
 		<summary lang="fr_CA">Aeon Nox 5 : Redux</summary>
 		<summary lang="gl">Aeon Nox 5: Redux</summary>
 		<summary lang="he">Aeon Nox 5: Redux</summary>

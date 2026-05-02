@@ -245,6 +245,15 @@
 					<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
 					<include>VisibleFadeAnimation</include>
 				</control>
+				<!--
+				<control type="image">
+					<left>636</left>
+					<colordiffuse>grey</colordiffuse>
+					<include>MediaFlagVars</include>
+					<texture>$VAR[HdrTypeIcon,flags/video/,.png]</texture>
+					<visible>!String.IsEmpty(ListItem.HdrType)</visible>
+				</control>
+				-->
 				<control type="group">
 					<visible>Container.Content(tvshows) | Container.Content(seasons)</visible>
 					<include>VisibleFadeAnimation</include>

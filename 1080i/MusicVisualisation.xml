@@ -10,9 +10,11 @@
 	<!--
 			<include>FullscreenDimensions</include>
 	-->
-<!-- /3dfx -->
+	<!--
 			<animation effect="fade" start="0" end="100" time="400">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+	-->
+<!-- /3dfx -->
 			<visible>Player.HasAudio + ![String.IsEqual(Visualisation.Name,waveform) | String.Contains(Visualisation.Name,spectrum)]</visible>
 		</control>
 		<control type="group">

@@ -1162,6 +1162,15 @@
 						<texture>$VAR[SourceFlagVar,flags/video/,.png]</texture>
 						<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
 					</control>
+					<!--
+					<control type="image">
+						<left>637</left>
+						<colordiffuse>grey</colordiffuse>
+						<include>MediaFlagVars</include>
+						<texture>$VAR[HdrTypeIcon,flags/video/,.png]</texture>
+						<visible>!String.IsEmpty(ListItem.HdrType)</visible>
+					</control>
+					-->
 				</control>
 				<control type="textbox" id="70">
 					<label>$VAR[VideoPlotVar]</label>

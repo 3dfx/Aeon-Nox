@@ -2,8 +2,15 @@
 <includes>
 <!-- 3dfx -->
 	<variable name="HDR">
-		<value condition="String.Contains(Player.filename,x265) + String.Contains(Player.filename,HDR)">HDR</value>
-		<value condition="String.Contains(Player.filename,x265) + String.Contains(Player.filename, DV )">DV</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,hdr10)">HDR</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,hlg)">HLG</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,dolbyvision)">DV</value>
+		<value>$INFO[VideoPlayer.HdrType]</value>
+	</variable>
+	<variable name="HdrTypeIcon">
+		<value condition="String.IsEqual(ListItem.HdrType,dolbyvision)">hdr_dv</value>
+		<value condition="String.IsEqual(ListItem.HdrType,hlg)">hdr_hlg</value>
+		<value condition="String.IsEqual(ListItem.HdrType,hdr10)">hdr_hdr10</value>
 		<value></value>
 	</variable>
 	<variable name="HevcBits">
@@ -14,10 +21,6 @@
 	<variable name="AudioDecoderVar">
 		<value condition="String.Contains(Player.filename,Atmos) + [String.IsEqual(Player.Process(AudioDecoder),pt-truehd) | String.IsEqual(Player.Process(AudioDecoder),PT_TRUEHD)]">Atmos</value>
 		<value condition="String.Contains(Player.filename,Atmos) + [String.IsEqual(Player.Process(AudioDecoder),ff-eac3) | String.IsEqual(Player.Process(AudioDecoder),pt-eac3) | String.IsEqual(Player.Process(AudioDecoder),PT_EAC3)]">Atmos</value>
-		<!--
-		Integer.IsGreater(VideoPlayer.AudioChannels,7)
-		<value condition="String.Contains(Player.filename,Atmos)">Atmos</value>
-		-->
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),pt-truehd) | String.IsEqual(Player.Process(AudioDecoder),PT_TRUEHD)]">True-HD</value>
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-eac3) | String.IsEqual(Player.Process(AudioDecoder),pt-eac3) | String.IsEqual(Player.Process(AudioDecoder),PT_EAC3)]">E-AC3</value>
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-ac3) | String.IsEqual(Player.Process(AudioDecoder),pt-ac3) | String.IsEqual(Player.Process(AudioDecoder),PT_AC3)]">AC3</value>
@@ -53,6 +56,143 @@
 		<value condition="String.Contains(Player.Filename,DTS-X)">dts-x</value>
 		<value condition="String.Contains(Player.Filename,DTSX)">dts-x</value>
 		<value>$INFO[VideoPlayer.AudioCodec]</value>
+	</variable>
+	<variable name="SelectVersionPosterVar">
+		<value condition="!String.IsEmpty(Container(6).ListItem.Art(poster))">$INFO[Container(6).ListItem.Art(poster)]</value>
+		<value condition="!String.IsEmpty(Container(6).ListItem.Art(thumb))">$INFO[Container(6).ListItem.Art(thumb)]</value>
+		<value condition="!String.IsEmpty(Container(6).ListItem.Art(Icon))">$INFO[Container(6).ListItem.Art(Icon)]</value>
+	</variable>
+	<variable name="VideoVersionPosterVar">
+		<value condition="!String.IsEmpty(Container(50).ListItem.Art(poster))">$INFO[Container(50).ListItem.Art(poster)]</value>
+		<value condition="!String.IsEmpty(Container(50).ListItem.Art(thumb))">$INFO[Container(50).ListItem.Art(thumb)]</value>
+	</variable>
+	<variable name="VideoVersionThumbVar">
+		<value condition="Control.HasFocus(50)">$INFO[Container(50).ListItem.Art(thumb)]</value>
+		<value condition="Control.HasFocus(51)">$INFO[Container(51).ListItem.Art(thumb)]</value>
+		<value>$INFO[Window(home).Property(thumb)]</value>
+	</variable>
+	<variable name="VideoVersionFileVar">
+		<value condition="Control.HasFocus(50)">$INFO[Container(50).ListItem.FileNameAndPath]</value>
+		<value>$INFO[ListItem.FileNameAndPath]</value>
+	</variable>
+	<variable name="NotStdVersionName">
+		<value condition="!String.IsEmpty(ListItem.VideoVersionName) + !String.IsEqual(ListItem.VideoVersionName,Standard Edition) + !String.IsEqual(ListItem.VideoVersionName,Standard Version)"> ($INFO[ListItem.VideoVersionName])</value>
+		<value></value>
+	</variable>
+	<variable name="SelectLabel">
+		<value condition="Control.IsVisible(50)">[COLOR=grey]$INFO[Container(50).NumItems][/COLOR] $LOCALIZE[31025] - [COLOR=grey]$INFO[Container(50).CurrentPage]/$INFO[Container(50).NumPages][/COLOR]</value>
+		<value condition="Control.IsVisible(3)">[COLOR=grey]$INFO[Container(3).NumItems][/COLOR] $LOCALIZE[31025] - [COLOR=grey]$INFO[Container(3).CurrentPage]/$INFO[Container(3).NumPages][/COLOR]</value>
+		<value>[COLOR=grey]$INFO[Container(6).NumItems][/COLOR] $LOCALIZE[31025] - [COLOR=grey]$INFO[Container(6).CurrentPage]/$INFO[Container(6).NumPages][/COLOR]</value>
+	</variable>
+	<variable name="FileBrowserSelectLabel">
+		<value condition="Control.IsVisible(450)">[COLOR=grey]$INFO[Container(450).NumItems][/COLOR] $LOCALIZE[31025] - [COLOR=grey]$INFO[Container(450).CurrentPage]/$INFO[Container(450).NumPages][/COLOR]</value>
+		<value>[COLOR=grey]$INFO[Container(451).NumItems][/COLOR] $LOCALIZE[31025] - [COLOR=grey]$INFO[Container(451).CurrentPage]/$INFO[Container(451).NumPages][/COLOR]</value>
+	</variable>
+
+	<variable name="VideoListPosterVar">
+		<value condition="!String.IsEmpty(container(6).listitem.art(poster))">$INFO[container(6).listitem.art(poster)]</value>
+		<value condition="!String.IsEmpty(container(6).listitem.art(thumb))">$INFO[container(6).listitem.art(thumb)]</value>
+		<value condition="!String.IsEmpty(container(50).listitem.art(poster))">$INFO[container(50).listitem.art(poster)]</value>
+		<value condition="!String.IsEmpty(container(50).listitem.art(thumb))">$INFO[container(50).listitem.art(thumb)]</value>
+		<value condition="String.IsEmpty(Listitem.Art(poster))">$INFO[Listitem.Art(poster)]</value>
+		<value>$INFO[ListItem.Icon]</value>
+	</variable>
+	<variable name="VideoListThumbVar">
+		<value condition="!String.IsEmpty(Listitem.Art(landscape))">$INFO[Listitem.Art(landscape)]</value>
+		<value condition="!String.IsEmpty(Listitem.Art(fanart))">$INFO[Listitem.Art(fanart)]</value>
+		<value condition="!String.IsEmpty(Listitem.Art(thumb))">$INFO[Listitem.Art(thumb)]</value>
+		<value>$INFO[ListItem.Icon]</value>
+	</variable>
+	<variable name="VideoResolutionTypeVar">
+		<value condition="String.IsEqual(ListItem.VideoResolution,480)">SD</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,540)">SD</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,576)">SD</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,720)">HD</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,1080)">HD</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,4K)">UHD</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,8K)">UHD</value>
+	</variable>
+	<variable name="VideoCodecVar">
+		<value condition="String.IsEqual(ListItem.VideoCodec,av1)">AV1</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,avc1)">AVC-1</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,div3)">DivX</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,divx)">DivX</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,dx50)">DivX</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,flv)">FLV</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,h264)">H.264</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,hev1)">H.265</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,hevc)">H.265</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,hvc1)">H.265</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,mpeg1)">MPEG-1</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,mpeg2)">MPEG-2</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,mpeg2video)">MPEG-2</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,mp4v)">MPEG-4</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,mpeg4)">MPEG-4</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,theora)">Theora</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,vc1)">VC-1</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,vc-1)">VC-1</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,vp8)">VP8</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,vp9)">VP9</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,wmv)">WMV</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,wmv3)">WMV</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,wvc1)">VC-1</value>
+		<value condition="String.IsEqual(ListItem.VideoCodec,xvid)">XviD</value>
+		<value>$INFO[ListItem.VideoCodec]</value>
+	</variable>
+	<variable name="VideoHDRVar">
+		<value condition="String.IsEqual(ListItem.HdrType,hdr10)">HDR10</value>
+		<value condition="String.IsEqual(ListItem.HdrType,hlg)">HLG</value>
+		<value condition="String.IsEqual(ListItem.HdrType,dolbyvision)">Dolby Vision</value>
+		<value>$INFO[ListItem.HdrType]</value>
+	</variable>
+	<variable name="AudioCodecVar">
+		<value condition="String.IsEqual(ListItem.AudioCodec,aac)">AAC</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,aac_latm)">AAC</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,ac3)">Dolby D</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,aif)">AIFF</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,aifc)">AIFF</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,aiff)">AIFF</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,alac)">ALAC</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,ape)">APE</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,avc)">AVC</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,cdda)">CDDA</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dca)">DTS</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dolbydigital)">Dolby D</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dts)">DTS</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_hra)">DTSHD-HRA</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma)">DTSHD-MA</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtsma)">DTSHD-MA</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,eac3)">Dolby D+</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,flac)">FLAC</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,mp1)">MP1</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,mp3)">MP3</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,mp3float)">MP3</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,ogg)">OGG</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,opus)">OPUS</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,pcm)">PCM</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,pcm_bluray)">PCM</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,pcm_s16le)">PCM</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,pcm_s24le)">PCM</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,truehd)">TrueHD</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,vorbis)">Vorbis</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,wav)">WAV</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,wavpack)">WAVP</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,wmapro)">WMA-PRO</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,wmav2)">WMA</value>
+		<value>$INFO[ListItem.AudioCodec]</value>
+	</variable>
+	<variable name="AudioChannelsVar">
+		<value condition="String.IsEqual(ListItem.AudioChannels,0)">0.0</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,1)">1.0</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,2)">2.0</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,3)">2.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,4)">4.0</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,5)">4.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,6)">5.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,7)">6.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,8)">7.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,10)">9.1</value>
+		<value>$INFO[ListItem.AudioChannels]</value>
 	</variable>
 <!-- /3dfx -->
 
@@ -350,7 +490,6 @@
 	</variable>
 	<variable name="52MusicInfoPanelVar">
 		<value condition="Container.Content(artists) + String.IsEmpty(Skin.String(52.Artists.InfoPanel))">Skin.SetString(52.Artists.InfoPanel,2)</value>
-		<!-- <value condition="Container.Content(artists) + String.IsEqual(Skin.String(52.Artists.InfoPanel),1)">Skin.SetString(52.Artists.InfoPanel,2)</value> -->
 		<value condition="Container.Content(artists) + String.IsEqual(Skin.String(52.Artists.InfoPanel),2)">Skin.Reset(52.Artists.InfoPanel)</value>
 	</variable>
 	<variable name="54MusicInfoPanelVar">
@@ -358,7 +497,6 @@
 		<value condition="Container.Content(albums) + String.IsEqual(Skin.String(54.Albums.InfoPanel),1)">Skin.Reset(54.Albums.InfoPanel)</value>
 		<value condition="Container.Content(artists) + String.IsEmpty(Skin.String(54.Artists.InfoPanel))">Skin.SetString(54.Artists.InfoPanel,1)</value>
 		<value condition="Container.Content(artists) + String.IsEqual(Skin.String(54.Artists.InfoPanel),1)">Skin.Reset(54.Artists.InfoPanel)</value>
-		<!-- <value condition="Container.Content(albums) + String.IsEqual(Skin.String(54.Albums.InfoPanel),2)">Skin.Reset(54.Albums.InfoPanel)</value> -->
 	</variable>
 	<variable name="InfoPanelLabelVar">
 		<value condition="String.IsEqual(Control.GetLabel(4420),1)">$LOCALIZE[20445]</value>
@@ -410,15 +548,19 @@
 	</variable>
 	<variable name="PosterThumbVar">
 		<value condition="!String.IsEmpty(Container.Art(season.poster))">$INFO[Container.Art(season.poster)]</value>
-		<value condition="!String.IsEmpty(ListItem.Art(tvshow.poster)) + !Container.COntent(seasons)">$INFO[ListItem.Art(tvshow.poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(tvshow.poster)) + !Container.Content(seasons)">$INFO[ListItem.Art(tvshow.poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value condition="Container.Content(genres)">$INFO[ListItem.Label,special://skin/extras/moviegenres/,.jpg]</value>
 		<value>$INFO[ListItem.Icon]</value>
 	</variable>
 	<variable name="FloorLabelVar">
 		<value condition="Container.Content(episodes) + String.Contains(Container.FolderPath,/recentlyaddedepisodes)">$INFO[ListItem.Season,,x]$INFO[ListItem.Episode,,. ]$INFO[ListItem.Title]</value>
-		<value condition="Container.Content(movies) + ![Control.IsVisible(52) | Control.IsVisible(53)]">$INFO[ListItem.Label]$INFO[ListItem.Year, [COLOR grey](,)[/COLOR]]</value>
+		<value condition="Container.Content(movies) + ![Control.IsVisible(52) | Control.IsVisible(53)]">$INFO[ListItem.Label]</value>
 		<value>$INFO[ListItem.Label]</value>
+	</variable>
+	<variable name="FloorSubLabelYear">
+		<value condition="!String.IsEmpty(ListItem.Duration)">$INFO[ListItem.Year,, - ]</value>
+		<value></value>
 	</variable>
 	<variable name="FloorSubLabelVar">
 		<value condition="Container.Content(episodes)">$INFO[ListItem.TvShowTitle]</value>
@@ -427,7 +569,7 @@
 		<value condition="String.IsEmpty(ListItem.Genre) + Container.Content(sets)">$INFO[Window(Home).Property(Set.Movies.Genre)]</value>
 		<value condition="[Control.IsVisible(52) | Control.IsVisible(53)] | [Container.Content(tvshows) | Container.Content(seasons)]">$INFO[ListItem.Genre]</value>
 		<value condition="Container.Content(files)">$INFO[ListItem.Date]</value>
-		<value>$VAR[DurationMinutesVar,, $LOCALIZE[31162] - ]$INFO[ListItem.Genre]</value>
+		<value>$VAR[FloorSubLabelYear]$VAR[DurationMinutesVar,, $LOCALIZE[31162] - ]$INFO[ListItem.Genre]</value>
 	</variable>
 	<variable name="FloorLabel2Var">
 		<value condition="Container.Content(artists)">$INFO[ListItem.Property(Artist_Genre)]</value>
@@ -510,14 +652,15 @@
 		<value>$LOCALIZE[571]</value>
 	</variable>
 	<variable name="WidgetListContent">
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(Widget),2)">plugin://service.library.data.provider?type=randommovies&amp;reload=$INFO[Window.Property(randommovies)]</value>
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(Widget),5)">plugin://service.library.data.provider?type=randomepisodes&amp;reload=$INFO[Window.Property(randomepisodes)]</value>
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(Widget),6)">plugin://service.library.data.provider?type=recommendedepisodes&amp;reload=$INFO[Window.Property(recommendedepisodes)]</value>
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(Widget),7)">plugin://service.library.data.provider?type=randomsongs&amp;reload=$INFO[Window.Property(randomsongs)]</value>
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(Widget),8)">plugin://service.library.data.provider?type=randomalbums&amp;reload=$INFO[Window.Property(randomalbums)]</value>
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(Widget),9)">plugin://service.library.data.provider?type=recentalbums&amp;reload=$INFO[Window.Property(recentalbums)]</value>
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(Widget),10)">plugin://service.library.data.provider?type=recommendedalbums&amp;reload=$INFO[Window.Property(recommendedalbums)]</value>
-		<value condition="!String.IsEmpty(Container(9000).ListItem.Property(Widget))">$INFO[Container(9000).ListItem.Property(Widget)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(Widget),2)">plugin://service.library.data.provider?type=randommovies&amp;reload=$INFO[Window.Property(randommovies)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(Widget),5)">plugin://service.library.data.provider?type=randomepisodes&amp;reload=$INFO[Window.Property(randomepisodes)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(Widget),6)">plugin://service.library.data.provider?type=recommendedepisodes&amp;reload=$INFO[Window.Property(recommendedepisodes)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(Widget),7)">plugin://service.library.data.provider?type=randomsongs&amp;reload=$INFO[Window.Property(randomsongs)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(Widget),8)">plugin://service.library.data.provider?type=randomalbums&amp;reload=$INFO[Window.Property(randomalbums)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(Widget),9)">plugin://service.library.data.provider?type=recentalbums&amp;reload=$INFO[Window.Property(recentalbums)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(Widget),10)">plugin://service.library.data.provider?type=recommendedalbums&amp;reload=$INFO[Window.Property(recommendedalbums)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + !String.IsEmpty(Container(9000).ListItem.Property(Widget))">$INFO[Container(9000).ListItem.Property(Widget)]</value>
+		<value></value>
 	</variable>
 	<variable name="WidgetLabelVar">
 		<value condition="String.IsEqual(Window(Home).Property(HomeWidget),1)">$LOCALIZE[31152]</value>
@@ -676,9 +819,9 @@
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(WidgetType),12)">live tv</value>
 	</variable>
 	<variable name="PlaylistStatsContentVar">
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(InfoLine),9)">plugin://service.library.data.provider?type=playliststats&amp;id=$INFO[Container(9000).ListItem.Property(Path)]</value>
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(InfoLine),10)">plugin://service.library.data.provider?type=playliststats&amp;id=$INFO[Container(9000).ListItem.Property(Path)]</value>
-		<value condition="String.IsEqual(Container(9000).ListItem.Property(InfoLine),11)">plugin://service.library.data.provider?type=playliststats&amp;id=$INFO[Container(9000).ListItem.Property(Path)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(InfoLine),9)">plugin://service.library.data.provider?type=playliststats&amp;id=$INFO[Container(9000).ListItem.Property(Path)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(InfoLine),10)">plugin://service.library.data.provider?type=playliststats&amp;id=$INFO[Container(9000).ListItem.Property(Path)]</value>
+		<value condition="System.HasAddon(service.library.data.provider) + String.IsEqual(Container(9000).ListItem.Property(InfoLine),11)">plugin://service.library.data.provider?type=playliststats&amp;id=$INFO[Container(9000).ListItem.Property(Path)]</value>
 		<value>special://skin/extras/playlists/recentmovies.xsp</value>
 	</variable>
 	<variable name="AudioChannelVar">
