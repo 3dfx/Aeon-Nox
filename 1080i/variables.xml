@@ -19,15 +19,17 @@
 		<value></value>
 	</variable>
 	<variable name="AudioDecoderVar">
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),EAC3_DDP_ATMOS)">EAC3 Atmos</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),TRUEHD_ATMOS)">TrueHD Atmos</value>
 		<value condition="String.Contains(Player.filename,Atmos) + [String.IsEqual(Player.Process(AudioDecoder),pt-truehd) | String.IsEqual(Player.Process(AudioDecoder),PT_TRUEHD)]">Atmos</value>
 		<value condition="String.Contains(Player.filename,Atmos) + [String.IsEqual(Player.Process(AudioDecoder),ff-eac3) | String.IsEqual(Player.Process(AudioDecoder),pt-eac3) | String.IsEqual(Player.Process(AudioDecoder),PT_EAC3)]">Atmos</value>
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),pt-truehd) | String.IsEqual(Player.Process(AudioDecoder),PT_TRUEHD)]">True-HD</value>
-		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-eac3) | String.IsEqual(Player.Process(AudioDecoder),pt-eac3) | String.IsEqual(Player.Process(AudioDecoder),PT_EAC3)]">E-AC3</value>
-		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-ac3) | String.IsEqual(Player.Process(AudioDecoder),pt-ac3) | String.IsEqual(Player.Process(AudioDecoder),PT_AC3)]">AC3</value>
+		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-eac3) | String.IsEqual(Player.Process(AudioDecoder),a_eac3) | String.IsEqual(Player.Process(AudioDecoder),pt-eac3) | String.IsEqual(Player.Process(AudioDecoder),PT_EAC3)]">E-AC3</value>
+		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-ac3) | String.IsEqual(Player.Process(AudioDecoder),ac3) | String.IsEqual(Player.Process(AudioDecoder),pt-ac3) | String.IsEqual(Player.Process(AudioDecoder),pt-ac3) | String.IsEqual(Player.Process(AudioDecoder),PT_AC3)]">AC3</value>
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),dca) | String.IsEqual(Player.Process(AudioDecoder),pt-dts) | String.Contains(Player.filename,DTS)]">DTS</value>
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),pt-dtshd) | String.Contains(Player.filename,DTSHD) | String.Contains(Player.filename,DTS-HD)]">DTS-HD</value>
 		<value condition="String.Contains(Player.filename,DTSX)">DTS:X</value>
-		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-aac) | String.IsEqual(Player.Process(AudioDecoder),ff-aac_latm) | String.IsEqual(Player.Process(AudioDecoder),aac)]">AAC</value>
+		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-aac) | String.IsEqual(Player.Process(AudioDecoder),ff-aac_latm) | String.IsEqual(Player.Process(AudioDecoder),aac_latm) | String.IsEqual(Player.Process(AudioDecoder),aac) | String.IsEqual(Player.Process(AudioDecoder),aac_lc) | String.IsEqual(Player.Process(AudioDecoder),he_aac)]">AAC</value>
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-alac) | String.IsEqual(Player.Process(AudioDecoder),alac)]">ALAC</value>
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-mp3float) | String.IsEqual(Player.Process(AudioDecoder),mp3)]">MP3</value>
 		<value condition="[String.IsEqual(Player.Process(AudioDecoder),ff-mp2mp2) | String.IsEqual(Player.Process(AudioDecoder),mp2)]">MP2</value>
@@ -46,15 +48,44 @@
 		<value>$INFO[Player.Process(AudioSamplerate)] Hz</value>
 	</variable>
 	<variable name="ListItemAudioCodecPlusFilenameFlags">
+		<value condition="String.IsEqual(ListItem.AudioCodec,atmos)">atmos</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),TRUEHD_ATMOS)">atmos</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),EAC3_DDP_ATMOS)">atmos</value>
 		<value condition="String.Contains(ListItem.Filenameandpath,Atmos)">atmos</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma_x)">dts-x</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_hra)">dtshd_hra</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma)">dtshd_ma</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtsma)">dtshd_ma</value>
 		<value condition="String.Contains(ListItem.Filenameandpath,DTS-X)">dts-x</value>
 		<value condition="String.Contains(ListItem.Filenameandpath,DTSX)">dts-x</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),ff-aac)">aac</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),ff-aac_latm)">aac</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,a_eac3)">ac3</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,eac3)">ac3</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,ff-aac)">aac</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,ff-aac_latm)">aac</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,aac_latm)">aac</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,aac_lc)">aac</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,he_aac)">aac</value>
 		<value>$INFO[ListItem.AudioCodec]</value>
 	</variable>
 	<variable name="VideoPlayerAudioCodecPlusFilenameFlags">
+		<value condition="String.IsEqual(VideoPlayer.AudioCodec,atmos)">atmos</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),TRUEHD_ATMOS)">atmos</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),EAC3_DDP_ATMOS)">atmos</value>
 		<value condition="String.Contains(Player.Filename,Atmos)">atmos</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x)">dts-x</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_hra)">dtshd_hra</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma)">dtshd_ma</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioCodec,dtsma)">dtshd_ma</value>
 		<value condition="String.Contains(Player.Filename,DTS-X)">dts-x</value>
 		<value condition="String.Contains(Player.Filename,DTSX)">dts-x</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),ff-aac)">aac</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),ff-aac_latm)">aac</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),aac_latm)">aac</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),aac_lc)">aac</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),he_aac)">aac</value>
+		<value condition="String.IsEqual(Player.Process(AudioDecoder),aac)">aac</value>
 		<value>$INFO[VideoPlayer.AudioCodec]</value>
 	</variable>
 	<variable name="SelectVersionPosterVar">
@@ -147,6 +178,8 @@
 	</variable>
 	<variable name="AudioCodecVar">
 		<value condition="String.IsEqual(ListItem.AudioCodec,aac)">AAC</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,he_aac)">AAC</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,aac_lc)">AAC</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,aac_latm)">AAC</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,ac3)">Dolby D</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,aif)">AIFF</value>
@@ -162,6 +195,8 @@
 		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_hra)">DTSHD-HRA</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma)">DTSHD-MA</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,dtsma)">DTSHD-MA</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma_x)">DTS-X</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,a_eac3)">Dolby D+</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,eac3)">Dolby D+</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,flac)">FLAC</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,mp1)">MP1</value>
@@ -410,11 +445,13 @@
 	</variable>
 	<variable name="SourceFlagVar">
 <!-- 3dfx -->
-		<value condition="String.Contains(ListItem.filename,x265) + String.Contains(ListItem.filename,10bit)">hevc10</value>
-		<value condition="String.Contains(ListItem.filename,x265) + String.Contains(ListItem.filename,12bit)">hevc10</value>
+		<value condition="String.Contains(ListItem.Filename,x265) + String.Contains(ListItem.Filename,10bit)">hevc10</value>
+		<value condition="String.Contains(ListItem.Filename,x265) + String.Contains(ListItem.Filename,12bit)">hevc10</value>
+		<value condition="String.Contains(ListItem.VideoCodec,x265)">hevc</value>
+		<value condition="String.Contains(ListItem.VideoCodec,hevc)">hevc</value>
 <!-- /3dfx -->
 
-		<value condition="[String.Contains(ListItem.filename,PDTV) | String.Contains(ListItem.filename,sdtv) | String.Contains(ListItem.filename,sd tv)]">sdtv</value>
+		<value condition="[String.Contains(ListItem.Filename,PDTV) | String.Contains(ListItem.Filename,sdtv) | String.Contains(ListItem.Filename,sd tv)]">sdtv</value>
 		<value condition="[String.Contains(ListItem.Filename,hdtv) | String.Contains(ListItem.Filename,hd tv)]">hdtv</value>
 		<value condition="[String.Contains(ListItem.Filename,hddvd) | String.Contains(ListItem.Filename,hd-dvd)]">hddvd</value>
 		<value condition="ListItem.IsStereoscopic">bluray3d</value>
@@ -426,8 +463,10 @@
 	</variable>
 	<variable name="VideoSourceFlagVar">
 <!-- 3dfx -->
-		<value condition="String.Contains(Player.filename,x265) + String.Contains(Player.filename,10bit)">hevc10</value>
-		<value condition="String.Contains(Player.filename,x265) + String.Contains(Player.filename,12bit)">hevc10</value>
+		<value condition="String.Contains(Player.Filename,x265) + String.Contains(Player.Filename,10bit)">hevc10</value>
+		<value condition="String.Contains(Player.Filename,x265) + String.Contains(Player.Filename,12bit)">hevc10</value>
+		<value condition="String.Contains(VideoPlayer.VideoCodec,x265)">hevc</value>
+		<value condition="String.Contains(VideoPlayer.VideoCodec,hevc)">hevc</value>
 <!-- /3dfx -->
 
 		<value condition="[String.Contains(Player.Filenameandpath,PDTV) | String.Contains(Player.Filenameandpath,sdtv)]">sdtv</value>

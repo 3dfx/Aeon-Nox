@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+	<?xml version="1.0" encoding="UTF-8"?>
 <window>
 	<defaultcontrol always="true">9000</defaultcontrol>
 	<coordinates>
@@ -48,6 +48,9 @@
 					<width>300</width>
 					<height>332</height>
 					<aspectratio aligny="top">keep</aspectratio>
+					<!--
+					<texture>$INFO[Container(6).ListItem.Icon]</texture>
+					-->
 					<texture>$VAR[VideoListPosterVar]</texture>
 					<bordertexture border="5">dialogs/default/inner.png</bordertexture>
 					<bordersize>1</bordersize>
